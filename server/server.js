@@ -1,53 +1,92 @@
-const express=require('express');
+import express from "express";
+import { prisma } from "./lib/prisma.js";
 const app=express();
 
-
-let applications=[
-     {id:1,company:"Flipkart",role:"part time intern",status:"open"},
-     {id:2,company:"Zepto",role:"full time intern",status:"closed"},
-     {id:3,company:"Paytm",role:"remote intern",status:"open"}
-   ]
 
 //Middleware shld be before all routes
 app.use(express.json());//parse json data from browser
 
-app.get('/internships',(req,res)=>{
-   res.json(applications);
+app.get('/internships',async (req,res)=>{
+   const internships=await prisma.internship.findMany();
+   res.json(internships);
 });
 
-app.post('/internships',(req,res)=>{
-    const {company,role,status}=req.body;
-     const id=applications[applications.length-1].id+1;
-     let newApplication={id,company,role,status};
-     applications.push(newApplication);
-     res.json(applications);
+app.post('/internships',async (req,res)=>{
+    const {company,role,status,location}=req.body;
+    //check if any value sent is invalid/empty
+
+    if(!company || !role || !status || !location){
+      return res.status(404).json({
+        error:"All fields are required"
+      });
+    }
+    
+    try{ const internship=await  prisma.internship.create({
+          data:{
+      company,role,status,location
+     }
+     });
+     res.json(internship);
+    }catch(error){
+      res.status(400).json({
+      error:"Invalid Details"
+      });
+    } 
 });
 
-app.put("/internships/:id",(req,res)=>{
+app.put("/internships/:id",async (req,res)=>{
       const id=Number(req.params.id);//we get always as string so convert to no
-      //Find application
-      const application=applications.find(application=>application.id===id);
-      if(!application){
-        return res.json("Id doesnt exitst");
-      }
-      const {company,role,status}=req.body;//extract value from body;
+      const {company,role,status,location}=req.body;//extract  value from body;
       //insert in variables;
-      application.company=company;
-      application.role=role;
-      application.status=status;
-      res.json(applications);
+      if(!company || !role || !status || !location){
+      return res.status(400).json({
+        error:"All fields are required"
+      });
+    }
+      
+      //Find application
+      try{
+      const updateId=await prisma.internship.findUnique({
+        where:{
+          id:id
+        }
+      });
+     
+      
+      const internship=await prisma.internship.update({
+        where:{
+           id:id,
+        },
+        data:{
+          company,role,status,location
+        }
+        });
+        res.json(internship);
+      }catch(error){
+       res.status(404).json({
+          error:"Intership not found"
+       });
+        
+      
+      }
 });
-app.delete("/internships/:id",(req,res)=>{
+
+app.delete("/internships/:id",async (req,res)=>{
    const id=Number(req.params.id);
    //check if id exits
-     const application=applications.find(application=>application.id===id);
-     if(!application){
-      return res.status(404).json("Application Not found");
+    try{
+     const internship=await prisma.internship.delete({
+      where:{
+        id:id
+      }
+     });
+     res.json(internship);
+    }
+     catch(error){
+      res.status(404).json({
+        error:"Internship not foung"
+      });
      }
-
-   //if exits remove it
-   applications=applications.filter(application=>application.id!==id);
-  res.json(applications);
 });
 
 app.listen(3000,()=>{

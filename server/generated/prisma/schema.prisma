@@ -13,13 +13,13 @@ datasource db {
 }
 
 //designing my database 
-model Internship{
-  id Int @id @default(autoincrement())
-  company String
-  role  String
-  status String
-  location String
-  stipend  Float?
+model Internship {
+  id          Int       @id @default(autoincrement())
+  company     String
+  role        String
+  status      String
+  location    String
+  stipend     Float?
   appliedDate DateTime?
-  notes  String?
+  notes       String?
 }
