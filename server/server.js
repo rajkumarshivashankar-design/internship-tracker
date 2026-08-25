@@ -6,6 +6,9 @@ const app=express();
 //Middleware shld be before all routes
 app.use(express.json());//parse json data from browser
 
+//Middleware to connect frontend with express
+app.use(express.static("public"));
+
 app.get('/internships',async (req,res)=>{
    const internships=await prisma.internship.findMany();
    res.json(internships);
