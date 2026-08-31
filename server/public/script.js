@@ -3,13 +3,16 @@ let editingId=null;//used to edit internship
 const container=document.getElementById("internships");
 
 //GET
-fetch("/internships")
-        .then(response=>response.json())
-        .then(data=>{
-            
+async function loadInternships(){
+ container.innerHTML="";
+const response=await fetch("/internships");
+const data=await response.json();
+
+ 
             data.forEach(internship=>{
                 const card=document.createElement("div");
-                card.innerHTML=`
+                const details=document.createElement("div");
+                details.innerHTML=`
                     <h2>${internship.company}</h2>
                     <p>${internship.role}</p>
                     <p>${internship.status}</p>
@@ -41,13 +44,19 @@ fetch("/internships")
                    
                      
                 });
-                card.appendChild(editButton);
+                card.appendChild(details);
+                card.appendChild(editButton); 
                 card.appendChild(deleteButton); 
                 container.appendChild(card);
         });
-    });
+}
+//function call (GET)
+loadInternships();
+           
+    
 
 //connect form to backend (POST)
+
 const form=document.getElementById("internshipForm");
 
 //when form submitted call backend
@@ -80,18 +89,12 @@ form.addEventListener("submit",async(event)=>{
          const internship=await response.json();
          console.log(internship);
 
-         //Display on screen
-         const card=document.createElement("div");
-          card.innerHTML=`
-                    <h2>${internship.company}</h2>
-                    <p>${internship.role}</p>
-                    <p>${internship.status}</p>
-                    <p>${internship.location}</p>
-                `;
-                container.appendChild(card);
+          await loadInternships();//gets all updated internships
     }
-    else{//PUT code
-          const response = await fetch(`/internships/${editingId}`, {
+    else{
+        //PUT code
+        
+        const response = await fetch(`/internships/${editingId}`, {
     method: "PUT",
     headers: {
         "Content-Type": "application/json"
@@ -107,7 +110,7 @@ form.addEventListener("submit",async(event)=>{
 const internship = await response.json();
 
 console.log(internship);
+await loadInternships();//get all the updated internships
+editingId=null; //reset the value back to null
     }
 });
-
-//delete a response
