@@ -13,8 +13,24 @@
         <input id="role" placeholder="Role" required>
         <input id="status" placeholder="Status" required>
         <input id="location" placeholder="Location" required>
+        <input id="jobUrl" type="url" placeholder="Job Url" >
         <button type="submit">Add Internship</button>
     </form>
+     
+    <!--dashboard container-->
+    <div id="stats">
+        <div><p>Total</p><span id="totalCount">0</span></div>
+       <div><p>Open</p><span id="openCount">0</span></div>
+       <div> <p>Closed</p><span id="closedCount">0</span></div>
+    </div> 
+ 
+    <input id="search" type="text" placeholder="Search Internships...">
+    <select id="statusFilter">
+        <option value="all">All Status</option> <!--js read the value -->
+        <option value="Open">Open</option>
+        <option value="Closed">Closed</option>
+       
+    </select>
     <div id="internships"></div>
     <script src="script.js"></script>
     

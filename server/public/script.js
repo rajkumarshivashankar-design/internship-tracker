@@ -2,13 +2,48 @@ let editingId=null;//used to edit internship
 
 const container=document.getElementById("internships");
 
-//GET
-async function loadInternships(){
- container.innerHTML="";
-const response=await fetch("/internships");
-const data=await response.json();
+//SEARCH
+const search=document.getElementById("search");
 
- 
+//FILTER
+const statusFilter=document.getElementById("statusFilter");
+statusFilter.addEventListener("change",filterInternships);
+
+//Dashboard Elements
+const totalCount=document.getElementById("totalCount");
+const openCount=document.getElementById("openCount");
+const closedCount=document.getElementById("closedCount");
+
+
+let internships=[];
+search.addEventListener("input",filterInternships);
+
+    function filterInternships(){
+    //filtering based on search
+    const text=search.value.toLowerCase();
+    const status=statusFilter.value;
+    const filtered=internships.filter(internship=>
+        (internship.company.toLowerCase().includes(text) ||
+        internship.role.toLowerCase().includes(text) ||
+        internship.location.toLowerCase().includes(text) )&&
+        (status==="all" || internship.status===status)   
+     );
+    loadInternships(filtered);
+     
+    }
+//GET
+async function loadInternships(data=null){
+ container.innerHTML="";
+ if(data===null){
+const response=await fetch("/internships");
+data=await response.json();
+internships=data;//data is stored in internships array
+
+//Update Dashboard 
+totalCount.textContent=internships.length;
+openCount.textContent=internships.filter(internship=>internship.status==="Open").length;
+closedCount.textContent=internships.filter(internship=>internship.status==="Closed").length;
+ }
             data.forEach(internship=>{
                 const card=document.createElement("div");
                 const details=document.createElement("div");
@@ -17,6 +52,7 @@ const data=await response.json();
                     <p>${internship.role}</p>
                     <p>${internship.status}</p>
                     <p>${internship.location}</p>
+                    <a href="${internship.jobUrl}">Apply</a>
                 `;
                 //add delete button
                 const deleteButton=document.createElement("button");
@@ -69,12 +105,13 @@ form.addEventListener("submit",async(event)=>{
     const role=document.getElementById("role").value;
     const status=document.getElementById("status").value;
     const location=document.getElementById("location").value;
+    const jobUrl=document.getElementById("jobUrl").value;
  
     if(editingId===null){//POST
          //fetch send request(response variable)
     const response=await fetch("/internships",{
          method:"POST" , //by default method is "GET"
-   
+           
          //headers (say wt type of data u r sending)
          headers:{
             "Content-Type":"application/json"
@@ -82,9 +119,11 @@ form.addEventListener("submit",async(event)=>{
 
          //body(stringify because we use app.use(express.json()) middleware in backend)
          body:JSON.stringify({
-            company,role,status,location
+            company,role,status,location,jobUrl
          })
+         
     });
+    console.log({company, role, status, location, jobUrl});
           //fetch (read response sent by server) 
          const internship=await response.json();
          console.log(internship);
@@ -103,7 +142,8 @@ form.addEventListener("submit",async(event)=>{
         company,
         role,
         status,
-        location
+        location,
+        jobUrl
     })
 });
 

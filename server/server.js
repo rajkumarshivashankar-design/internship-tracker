@@ -15,22 +15,23 @@ app.get('/internships',async (req,res)=>{
 });
 
 app.post('/internships',async (req,res)=>{
-    const {company,role,status,location}=req.body;
+    const {company,role,status,location,jobUrl}=req.body;
     //check if any value sent is invalid/empty
 
-    if(!company || !role || !status || !location){
-      return res.status(404).json({
+    if(!company || !role || !status || !location || !jobUrl){
+      return res.status(400).json({
         error:"All fields are required"
       });
     }
     
     try{ const internship=await  prisma.internship.create({
           data:{
-      company,role,status,location
+      company,role,status,location,jobUrl
      }
      });
      res.json(internship);
     }catch(error){
+      console.log(error);
       res.status(400).json({
       error:"Invalid Details"
       });

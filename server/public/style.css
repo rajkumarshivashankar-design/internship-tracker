@@ -1,7 +1,46 @@
 body{
     font-family:Arial,sans-serif;
     max-width:900px;
+    margin:40px auto;
+    padding:0 20px;
 }
+/* Dashboard cards */
+#stats > div {
+    padding: 15px 25px;   /* Space inside each card */
+    border: 1px solid #ddd; /* Creates a border around the card */
+    border-radius: 10px;  /* Rounds the corners */
+    flex: 1;              /* Makes all cards share equal width */
+}
+
+/*Dashboard labels */
+#stats p{
+    margin:0 0 8px;  /* Removes default margin and adds space below */
+}
+/* Dashboard numbers */
+#stats span{
+    font-size:24px;/* Makes the number larger */
+    font-weight:bold;   /* Makes the number stand out */
+}
+
+/* Search and filter */
+#search,
+#statusFilter {
+    padding: 10px;          /* Space inside the controls */
+    font-size: 16px;        /* Makes text easier to read */
+    margin-bottom: 20px;    /* Space below the controls */
+    box-sizing: border-box; /* Includes padding in the width */
+}
+
+/* Search box */
+#search {
+    width: 70%;             /* Takes most of the row */
+}
+
+/* Status filter */
+#statusFilter {
+    width: 25%;             /* Takes the remaining space */
+}
+
 #internshipForm{
     display:grid;
     gap:10px;
@@ -19,7 +58,16 @@ body{
     padding:20px;
     border:1px solid #ddd;
     border-radius:10px;
+    margin-bottom:10px;
+}
+
+/* Internship card buttons */
+#internships button {
+    padding: 10px;       /* Space inside buttons */
+    margin-right:16px;       /* Space between buttons */
+    cursor: pointer;         /* Shows hand cursor on hover */
 }
 #internships h2{
     margin-top:0;
+
 }

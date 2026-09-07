@@ -22,4 +22,5 @@ model Internship{
   stipend  Float?
   appliedDate DateTime?
   notes  String?
+  jobUrl String?
 }

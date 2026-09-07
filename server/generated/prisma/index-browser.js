@@ -128,7 +128,8 @@ exports.Prisma.InternshipScalarFieldEnum = {
   location: 'location',
   stipend: 'stipend',
   appliedDate: 'appliedDate',
-  notes: 'notes'
+  notes: 'notes',
+  jobUrl: 'jobUrl'
 };
 
 exports.Prisma.SortOrder = {

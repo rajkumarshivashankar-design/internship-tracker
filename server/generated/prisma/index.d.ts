@@ -925,6 +925,7 @@ export namespace Prisma {
     stipend: number | null
     appliedDate: Date | null
     notes: string | null
+    jobUrl: string | null
   }
 
   export type InternshipMaxAggregateOutputType = {
@@ -936,6 +937,7 @@ export namespace Prisma {
     stipend: number | null
     appliedDate: Date | null
     notes: string | null
+    jobUrl: string | null
   }
 
   export type InternshipCountAggregateOutputType = {
@@ -947,6 +949,7 @@ export namespace Prisma {
     stipend: number
     appliedDate: number
     notes: number
+    jobUrl: number
     _all: number
   }
 
@@ -970,6 +973,7 @@ export namespace Prisma {
     stipend?: true
     appliedDate?: true
     notes?: true
+    jobUrl?: true
   }
 
   export type InternshipMaxAggregateInputType = {
@@ -981,6 +985,7 @@ export namespace Prisma {
     stipend?: true
     appliedDate?: true
     notes?: true
+    jobUrl?: true
   }
 
   export type InternshipCountAggregateInputType = {
@@ -992,6 +997,7 @@ export namespace Prisma {
     stipend?: true
     appliedDate?: true
     notes?: true
+    jobUrl?: true
     _all?: true
   }
 
@@ -1090,6 +1096,7 @@ export namespace Prisma {
     stipend: number | null
     appliedDate: Date | null
     notes: string | null
+    jobUrl: string | null
     _count: InternshipCountAggregateOutputType | null
     _avg: InternshipAvgAggregateOutputType | null
     _sum: InternshipSumAggregateOutputType | null
@@ -1120,6 +1127,7 @@ export namespace Prisma {
     stipend?: boolean
     appliedDate?: boolean
     notes?: boolean
+    jobUrl?: boolean
   }, ExtArgs["result"]["internship"]>
 
   export type InternshipSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1131,6 +1139,7 @@ export namespace Prisma {
     stipend?: boolean
     appliedDate?: boolean
     notes?: boolean
+    jobUrl?: boolean
   }, ExtArgs["result"]["internship"]>
 
   export type InternshipSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1142,6 +1151,7 @@ export namespace Prisma {
     stipend?: boolean
     appliedDate?: boolean
     notes?: boolean
+    jobUrl?: boolean
   }, ExtArgs["result"]["internship"]>
 
   export type InternshipSelectScalar = {
@@ -1153,9 +1163,10 @@ export namespace Prisma {
     stipend?: boolean
     appliedDate?: boolean
     notes?: boolean
+    jobUrl?: boolean
   }
 
-  export type InternshipOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "company" | "role" | "status" | "location" | "stipend" | "appliedDate" | "notes", ExtArgs["result"]["internship"]>
+  export type InternshipOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "company" | "role" | "status" | "location" | "stipend" | "appliedDate" | "notes" | "jobUrl", ExtArgs["result"]["internship"]>
 
   export type $InternshipPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Internship"
@@ -1169,6 +1180,7 @@ export namespace Prisma {
       stipend: number | null
       appliedDate: Date | null
       notes: string | null
+      jobUrl: string | null
     }, ExtArgs["result"]["internship"]>
     composites: {}
   }
@@ -1600,6 +1612,7 @@ export namespace Prisma {
     readonly stipend: FieldRef<"Internship", 'Float'>
     readonly appliedDate: FieldRef<"Internship", 'DateTime'>
     readonly notes: FieldRef<"Internship", 'String'>
+    readonly jobUrl: FieldRef<"Internship", 'String'>
   }
     
 
@@ -1993,7 +2006,8 @@ export namespace Prisma {
     location: 'location',
     stipend: 'stipend',
     appliedDate: 'appliedDate',
-    notes: 'notes'
+    notes: 'notes',
+    jobUrl: 'jobUrl'
   };
 
   export type InternshipScalarFieldEnum = (typeof InternshipScalarFieldEnum)[keyof typeof InternshipScalarFieldEnum]
@@ -2099,6 +2113,7 @@ export namespace Prisma {
     stipend?: FloatNullableFilter<"Internship"> | number | null
     appliedDate?: DateTimeNullableFilter<"Internship"> | Date | string | null
     notes?: StringNullableFilter<"Internship"> | string | null
+    jobUrl?: StringNullableFilter<"Internship"> | string | null
   }
 
   export type InternshipOrderByWithRelationInput = {
@@ -2110,6 +2125,7 @@ export namespace Prisma {
     stipend?: SortOrderInput | SortOrder
     appliedDate?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    jobUrl?: SortOrderInput | SortOrder
   }
 
   export type InternshipWhereUniqueInput = Prisma.AtLeast<{
@@ -2124,6 +2140,7 @@ export namespace Prisma {
     stipend?: FloatNullableFilter<"Internship"> | number | null
     appliedDate?: DateTimeNullableFilter<"Internship"> | Date | string | null
     notes?: StringNullableFilter<"Internship"> | string | null
+    jobUrl?: StringNullableFilter<"Internship"> | string | null
   }, "id">
 
   export type InternshipOrderByWithAggregationInput = {
@@ -2135,6 +2152,7 @@ export namespace Prisma {
     stipend?: SortOrderInput | SortOrder
     appliedDate?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    jobUrl?: SortOrderInput | SortOrder
     _count?: InternshipCountOrderByAggregateInput
     _avg?: InternshipAvgOrderByAggregateInput
     _max?: InternshipMaxOrderByAggregateInput
@@ -2154,6 +2172,7 @@ export namespace Prisma {
     stipend?: FloatNullableWithAggregatesFilter<"Internship"> | number | null
     appliedDate?: DateTimeNullableWithAggregatesFilter<"Internship"> | Date | string | null
     notes?: StringNullableWithAggregatesFilter<"Internship"> | string | null
+    jobUrl?: StringNullableWithAggregatesFilter<"Internship"> | string | null
   }
 
   export type InternshipCreateInput = {
@@ -2164,6 +2183,7 @@ export namespace Prisma {
     stipend?: number | null
     appliedDate?: Date | string | null
     notes?: string | null
+    jobUrl?: string | null
   }
 
   export type InternshipUncheckedCreateInput = {
@@ -2175,6 +2195,7 @@ export namespace Prisma {
     stipend?: number | null
     appliedDate?: Date | string | null
     notes?: string | null
+    jobUrl?: string | null
   }
 
   export type InternshipUpdateInput = {
@@ -2185,6 +2206,7 @@ export namespace Prisma {
     stipend?: NullableFloatFieldUpdateOperationsInput | number | null
     appliedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    jobUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InternshipUncheckedUpdateInput = {
@@ -2196,6 +2218,7 @@ export namespace Prisma {
     stipend?: NullableFloatFieldUpdateOperationsInput | number | null
     appliedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    jobUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InternshipCreateManyInput = {
@@ -2207,6 +2230,7 @@ export namespace Prisma {
     stipend?: number | null
     appliedDate?: Date | string | null
     notes?: string | null
+    jobUrl?: string | null
   }
 
   export type InternshipUpdateManyMutationInput = {
@@ -2217,6 +2241,7 @@ export namespace Prisma {
     stipend?: NullableFloatFieldUpdateOperationsInput | number | null
     appliedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    jobUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type InternshipUncheckedUpdateManyInput = {
@@ -2228,6 +2253,7 @@ export namespace Prisma {
     stipend?: NullableFloatFieldUpdateOperationsInput | number | null
     appliedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    jobUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -2307,6 +2333,7 @@ export namespace Prisma {
     stipend?: SortOrder
     appliedDate?: SortOrder
     notes?: SortOrder
+    jobUrl?: SortOrder
   }
 
   export type InternshipAvgOrderByAggregateInput = {
@@ -2323,6 +2350,7 @@ export namespace Prisma {
     stipend?: SortOrder
     appliedDate?: SortOrder
     notes?: SortOrder
+    jobUrl?: SortOrder
   }
 
   export type InternshipMinOrderByAggregateInput = {
@@ -2334,6 +2362,7 @@ export namespace Prisma {
     stipend?: SortOrder
     appliedDate?: SortOrder
     notes?: SortOrder
+    jobUrl?: SortOrder
   }
 
   export type InternshipSumOrderByAggregateInput = {
