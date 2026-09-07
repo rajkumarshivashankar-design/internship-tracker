@@ -9,6 +9,6 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env.DATABASE_URL="postgresql://postgres:root@localhost:5432/internship_tracker"
-  },
+    url: process.env.DATABASE_URL
+},
 });
